@@ -21,6 +21,7 @@ public class ReactiveDatabaseConfig extends AbstractR2dbcConfiguration {
     @Value("${spring.data.postgres.password}")
     private String password;
 
+    @Override
     public ConnectionFactory connectionFactory() {
         return new PostgresqlConnectionFactory(
                 PostgresqlConnectionConfiguration.builder()

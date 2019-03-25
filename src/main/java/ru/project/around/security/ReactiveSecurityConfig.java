@@ -12,6 +12,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class ReactiveSecurityConfig {
 
     public static final String LOGIN_PATH = "/auth/login";
+    public static final String REGISTRATION_PATH = "/auth/registration";
     public static final String TOKEN_REFRESH_PATH = "/auth/tokens/refresh";
 
     @Autowired
@@ -30,6 +31,7 @@ public class ReactiveSecurityConfig {
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .pathMatchers(LOGIN_PATH).permitAll()
+                .pathMatchers(REGISTRATION_PATH).permitAll()
                 .pathMatchers(TOKEN_REFRESH_PATH).permitAll()
                 .anyExchange().authenticated()
                 .and().build();

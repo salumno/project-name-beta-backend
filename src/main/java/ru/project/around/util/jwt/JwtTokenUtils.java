@@ -53,7 +53,7 @@ public class JwtTokenUtils {
                 .setId(user.getId().toString())
                 .setSubject(user.getEmail())
                 .setExpiration(expDate)
-                .signWith(SignatureAlgorithm.ES512, secret)
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
