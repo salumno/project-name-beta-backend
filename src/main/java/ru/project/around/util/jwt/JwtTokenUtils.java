@@ -42,7 +42,7 @@ public class JwtTokenUtils {
         return Long.valueOf(getTokenClaims(token).getId());
     }
 
-    public String getUserEmail(final String token) {
+    public String getUserPhone(final String token) {
         return getTokenClaims(token).getSubject();
     }
 
@@ -51,7 +51,7 @@ public class JwtTokenUtils {
         final Date expDate = Date.from(Instant.now().plusMillis(additionalTime));
         return Jwts.builder()
                 .setId(user.getId().toString())
-                .setSubject(user.getEmail())
+                .setSubject(user.getPhone())
                 .setExpiration(expDate)
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();

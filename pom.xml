@@ -15,14 +15,29 @@
     </parent>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
         </dependency>
 
         <dependency>
@@ -38,8 +53,7 @@
             <version>0.9.1</version>
         </dependency>
 
-        <!--Dependencies for reactive DB connection-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-r2dbc</artifactId>
             <version>1.0.0.M1</version>
@@ -49,16 +63,16 @@
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
             <version>1.0.0.M7</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>repository.spring.milestone</id>
             <name>Spring Milestone Repository</name>
             <url>http://repo.spring.io/milestone</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <build>
         <plugins>

@@ -1,13 +1,11 @@
-package ru.project.around.model;
+package ru.project.around.model.login;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class UserCredentials {
+public class AppEntryPoint {
     @NotEmpty
     private String phone;
-    @NotEmpty
-    private String password;
 }

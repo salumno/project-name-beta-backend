@@ -1,18 +1,20 @@
 package ru.project.around.service;
 
-import reactor.core.publisher.Mono;
 import ru.project.around.model.*;
+import ru.project.around.model.login.AppEntryPoint;
 
 public interface AuthService {
-    Mono<AuthTokens> refreshTokens(final RefreshTokensParams refreshTokensParams);
+    AuthTokens refreshTokens(final RefreshTokensParams refreshTokensParams);
 
-    Mono<Boolean> isTokenValid(final String token);
+    boolean isTokenValid(final String token);
 
-    Mono<AuthTokens> createLoginTokens(final UserCredentials userCredentials);
+    AuthTokens createLoginTokens(final UserCredentials userCredentials);
 
-    Mono<Boolean> isCredentialsValid(final UserCredentials userCredentials);
+    boolean isCredentialsValid(final UserCredentials userCredentials);
 
-    Mono<Boolean> isRegistrationDataValid(final RegistrationParams registrationParams);
+    EntryProcessMarker serveEntryProcess(final AppEntryPoint appEntryPoint);
 
-    Mono<User> createNewUser(final RegistrationParams registrationParams);
+    PhoneCheckProcessMarker validatePhoneCheckCode(final PhoneCheckCodeParams phoneCheckCodeParams);
+
+    User registerUser(final RegistrationParams registrationParams);
 }

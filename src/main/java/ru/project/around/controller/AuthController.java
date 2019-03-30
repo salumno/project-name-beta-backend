@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
 import ru.project.around.model.*;
+import ru.project.around.model.login.AppEntryPoint;
 import ru.project.around.service.AuthService;
 
 import javax.validation.Valid;
@@ -24,38 +24,44 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/login")
-    public Mono<ResponseEntity<AuthTokens>> login(@RequestBody @Valid final UserCredentials userCredentials) {
-        return authService.isCredentialsValid(userCredentials).flatMap(isValid -> {
-            if (isValid) {
-                return authService.createLoginTokens(userCredentials).map(ResponseEntity::ok);
-            } else {
-                return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-            }
-        });
+
+    @PostMapping("/entry")
+    public ResponseEntity<EntryProcessMarker> applicationEntryPoint(@RequestBody @Valid final AppEntryPoint appEntryPoint) {
+        return ResponseEntity.ok(authService.serveEntryProcess(appEntryPoint));
+    }
+
+    @PostMapping("/phone/check")
+    public ResponseEntity<PhoneCheckProcessMarker> validatePhoneCheckCode(@RequestBody @Valid final PhoneCheckCodeParams phoneCheckCodeParams) {
+        return ResponseEntity.ok(authService.validatePhoneCheckCode(phoneCheckCodeParams));
     }
 
     @PostMapping("/registration")
-    public Mono<ResponseEntity<User>> registration(@RequestBody @Valid final RegistrationParams registrationParams) {
-        return authService.isRegistrationDataValid(registrationParams).flatMap(isValid -> {
-            if (isValid) {
-                return authService.createNewUser(registrationParams).map(ResponseEntity::ok);
-            } else {
-                return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-            }
-        });
+    public ResponseEntity<User> registrationSubmit(@RequestBody @Valid final RegistrationParams registrationParams) {
+        final User user = authService.registerUser(registrationParams);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } else {
+            return ResponseEntity.ok(user);
+        }
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthTokens> login(@RequestBody @Valid final UserCredentials userCredentials) {
+        if (authService.isCredentialsValid(userCredentials)) {
+            return ResponseEntity.ok(authService.createLoginTokens(userCredentials));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     @PostMapping("/tokens/refresh")
-    public Mono<ResponseEntity<AuthTokens>> refreshTokens(@RequestBody @Valid final RefreshTokensParams refreshTokensParams) {
+    public ResponseEntity<AuthTokens> refreshTokens(@RequestBody @Valid final RefreshTokensParams refreshTokensParams) {
         final String refreshToken = refreshTokensParams.getRefreshToken();
-
-        return authService.isTokenValid(refreshToken).flatMap(isValid -> {
-            if (isValid) {
-                return authService.refreshTokens(refreshTokensParams).map(ResponseEntity::ok);
-            } else {
-                return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-            }
-        });
+        if (authService.isTokenValid(refreshToken)) {
+            return ResponseEntity.ok(authService.refreshTokens(refreshTokensParams));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }

@@ -7,10 +7,25 @@ auth:
       refresh: 240000
 
 spring:
-  data:
-    postgres:
-      host: localhost
-      port: 5432
-      database: around-db
-      username: postgres
-      password: password2
+  application:
+    name: auth-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password2
+    url: jdbc:postgresql://localhost:5432/around-db
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  jta:
+    enabled: true
+
+app:
+  registration:
+    code:
+      exp: 600000

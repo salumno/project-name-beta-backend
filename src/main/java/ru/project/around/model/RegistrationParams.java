@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class RegistrationParams {
     @NotEmpty
-    private String email;
+    private String registrationSessionId;
     @NotEmpty
     private String phone;
     @NotEmpty
