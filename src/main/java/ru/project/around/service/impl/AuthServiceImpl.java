@@ -103,7 +103,9 @@ public class AuthServiceImpl implements AuthService {
         if (!phoneCheckCode.isPresent()) {
             return phoneCheckProcessMarkerFactory.createMarkerForInvalidCode(registrationSessionId);
         }
-        final PhoneCheckCode currentCode = phoneCheckCodeFactory.updatePhoneCheckCode(phoneCheckCode.get());
+        final PhoneCheckCode currentCode = phoneCheckCodeRepository.save(
+                phoneCheckCodeFactory.updatePhoneCheckCode(phoneCheckCode.get())
+        );
         if (PhoneCheckCodeStatus.BLOCKED.equals(currentCode.getStatus())) {
             return phoneCheckProcessMarkerFactory.createMarkerForFailedAttemptLimit(registrationSessionId);
         }
@@ -134,6 +136,8 @@ public class AuthServiceImpl implements AuthService {
             businessCard.setSurname(registrationParams.getSurname());
             businessCard.setPhone(registrationParams.getPhone());
             businessCardRepository.save(businessCard);
+
+            return user;
         }
         return null;
     }
@@ -194,7 +198,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private boolean isCodeExpired(final PhoneCheckCode code) {
-        return Instant.now().isAfter(Instant.ofEpochMilli(code.getExpirationTime()));
+        return code.getExpirationTime() < System.currentTimeMillis();
     }
 
     private boolean isUserCreationAllowed(final RegistrationParams registrationParams) {

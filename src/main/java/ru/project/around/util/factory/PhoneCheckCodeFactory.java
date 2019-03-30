@@ -24,14 +24,14 @@ public class PhoneCheckCodeFactory {
                 .phone(phone)
                 .status(PhoneCheckCodeStatus.ACTIVE)
                 .expirationTime(
-                        Instant.now().plusMillis(phoneCheckCodeExpirationTime).getLong(ChronoField.MILLI_OF_SECOND)
+                        System.currentTimeMillis() + phoneCheckCodeExpirationTime
                 )
                 .codeCheckAttemptCount(INITIAL_COUNT_OF_CHECK_ATTEMPT)
                 .build();
     }
 
     public PhoneCheckCode updatePhoneCheckCode(final PhoneCheckCode phoneCheckCode) {
-        final int updatedAttemptCount = phoneCheckCode.getCodeCheckAttemptCount();
+        final int updatedAttemptCount = phoneCheckCode.getCodeCheckAttemptCount() + 1;
         if (updatedAttemptCount > MAX_COUNT_OF_CHECK_ATTEMPT) {
             phoneCheckCode.setStatus(PhoneCheckCodeStatus.BLOCKED);
         }
