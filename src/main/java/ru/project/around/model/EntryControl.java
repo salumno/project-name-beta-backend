@@ -16,7 +16,9 @@ public class EntryControl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String phone;
+
     private Integer registrationAttemptCount;
 
     @Enumerated(EnumType.STRING)

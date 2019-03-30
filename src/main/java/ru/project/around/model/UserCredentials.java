@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 public class UserCredentials {
     @NotEmpty
     private String phone;
+
     @NotEmpty
     private String password;
 }

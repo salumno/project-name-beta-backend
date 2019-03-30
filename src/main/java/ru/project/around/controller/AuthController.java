@@ -24,7 +24,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-
     @PostMapping("/entry")
     public ResponseEntity<EntryProcessMarker> applicationEntryPoint(@RequestBody @Valid final AppEntryPoint appEntryPoint) {
         return ResponseEntity.ok(authService.serveEntryProcess(appEntryPoint));
@@ -44,7 +43,6 @@ public class AuthController {
             return ResponseEntity.ok(user);
         }
     }
-
 
     @PostMapping("/login")
     public ResponseEntity<AuthTokens> login(@RequestBody @Valid final UserCredentials userCredentials) {

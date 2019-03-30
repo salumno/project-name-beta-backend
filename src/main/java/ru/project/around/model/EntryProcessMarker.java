@@ -11,8 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EntryProcessMarker {
     private EntryProcessEnum process;
+
     private boolean isProcessAvailable;
+
     private boolean isCodeSent;
+
     private boolean isPhoneChecked;
+
     private String registrationSessionId;
 }
