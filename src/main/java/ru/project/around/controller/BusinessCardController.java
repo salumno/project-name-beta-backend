@@ -28,7 +28,7 @@ public class BusinessCardController {
         return ResponseEntity.ok(businessCardService.getBusinessCardsByUserIds(businessCardsRequestParams));
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/users/{userId}")
     public ResponseEntity<BusinessCard> getBusinessCardByUserId(@PathVariable @NotNull final Long userId) {
         return ResponseEntity.ok(businessCardService.getBusinessCardByUserId(userId));
     }

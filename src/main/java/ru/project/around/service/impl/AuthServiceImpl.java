@@ -186,6 +186,7 @@ public class AuthServiceImpl implements AuthService {
 
     private AuthTokens createFreshTokens(final User user) {
         final AuthTokens authTokens = new AuthTokens();
+        authTokens.setUserId(user.getId());
         authTokens.setAccessToken(tokenUtils.createAccessToken(user));
         authTokens.setRefreshToken(tokenUtils.createRefreshToken(user));
         return authTokens;
