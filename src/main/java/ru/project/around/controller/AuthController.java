@@ -38,7 +38,7 @@ public class AuthController {
     public ResponseEntity<User> registrationSubmit(@RequestBody @Valid final RegistrationParams registrationParams) {
         final User user = authService.registerUser(registrationParams);
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         } else {
             return ResponseEntity.ok(user);
         }
@@ -49,7 +49,7 @@ public class AuthController {
         if (authService.isCredentialsValid(userCredentials)) {
             return ResponseEntity.ok(authService.createLoginTokens(userCredentials));
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
@@ -59,7 +59,7 @@ public class AuthController {
         if (authService.isTokenValid(refreshToken)) {
             return ResponseEntity.ok(authService.refreshTokens(refreshTokensParams));
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 }
