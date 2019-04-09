@@ -33,7 +33,7 @@ public class BusinessCardController {
         if (businessCardService.isCardUpdateAllowed(cardId, updatedBusinessCard)) {
             return ResponseEntity.ok(businessCardService.updateBusinessCardInfo(cardId, updatedBusinessCard));
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
