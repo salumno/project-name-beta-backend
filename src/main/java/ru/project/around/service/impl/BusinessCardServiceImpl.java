@@ -101,7 +101,8 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     public void addCardIntoFavorites(final Long cardId) {
         final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
         final Optional<BusinessCard> businessCard = businessCardRepository.findById(cardId);
-        if (businessCard.isPresent()) {
+        final boolean isCardAlreadyAdded = favoriteCardsRepository.findByUserIdAndCardId(currentUserId, cardId) != null;
+        if (businessCard.isPresent() && !isCardAlreadyAdded) {
             final FavoriteCard favoriteCard = new FavoriteCard();
             favoriteCard.setUserId(currentUserId);
             favoriteCard.setCardId(cardId);
@@ -110,9 +111,22 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     }
 
     @Override
-    public boolean isCardUpdateAllowed(final Long cardId, final BusinessCard updatedBusinessCard) {
+    public boolean isCardOperationAllowed(final Long cardId, final BusinessCard updatedBusinessCard) {
         final BusinessCard businessCard = businessCardRepository.findById(cardId).orElse(null);
         final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
         return businessCard != null && currentUserId.equals(businessCard.getUserId());
+    }
+
+    @Override
+    public boolean isFavoriteCardsOperationAllowed(final Long cardId) {
+        final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
+        final FavoriteCard favoriteCard = favoriteCardsRepository.findByUserIdAndCardId(currentUserId, cardId);
+        return favoriteCard != null;
+    }
+
+    @Override
+    public void removeCardFromFavorites(final Long cardId) {
+        final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
+        favoriteCardsRepository.deleteByUserIdAndCardId(currentUserId, cardId);
     }
 }
