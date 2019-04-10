@@ -29,3 +29,6 @@ app:
   registration:
     code:
       exp: 600000
+  premium:
+    snooper:
+      exp: 600000
