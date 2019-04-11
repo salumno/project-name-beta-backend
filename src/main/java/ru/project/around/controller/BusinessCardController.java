@@ -1,14 +1,14 @@
 package ru.project.around.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.project.around.model.BusinessCard;
-import ru.project.around.model.BusinessCardsRequestParams;
+import ru.project.around.model.FavoriteCardParams;
 import ru.project.around.service.BusinessCardService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -22,14 +22,44 @@ public class BusinessCardController {
         this.businessCardService = businessCardService;
     }
 
-    @PostMapping
-    public ResponseEntity<List<BusinessCard>> getBusinessCardsByUserIds(
-            @RequestBody @Valid final BusinessCardsRequestParams businessCardsRequestParams) {
-        return ResponseEntity.ok(businessCardService.getBusinessCardsByUserIds(businessCardsRequestParams));
+    @GetMapping("{id}")
+    public ResponseEntity<BusinessCard> getBusinessCardById(@PathVariable("id") final Long cardId) {
+        return ResponseEntity.ok(businessCardService.getBusinessCardById(cardId));
+    }
+
+    @PostMapping("{id}")
+    public ResponseEntity<BusinessCard> updateBusinessCard(@PathVariable("id") final Long cardId,
+                                                           @RequestBody final BusinessCard updatedBusinessCard) {
+        if (businessCardService.isCardOperationAllowed(cardId, updatedBusinessCard)) {
+            return ResponseEntity.ok(businessCardService.updateBusinessCardInfo(cardId, updatedBusinessCard));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<BusinessCard> getBusinessCardByUserId(@PathVariable @NotNull final Long userId) {
+    public ResponseEntity<BusinessCard> getBusinessCardByUserId(@PathVariable final Long userId) {
         return ResponseEntity.ok(businessCardService.getBusinessCardByUserId(userId));
+    }
+
+    @GetMapping("/favorites")
+    public ResponseEntity<List<BusinessCard>> getFavoritesCards() {
+        return ResponseEntity.ok(businessCardService.getFavoriteBusinessCards());
+    }
+
+    @PostMapping("/favorites")
+    public ResponseEntity addCardIntoFavorites(@RequestBody @Valid final FavoriteCardParams favoriteCardParams) {
+        businessCardService.addCardIntoFavorites(favoriteCardParams.getCardId());
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/favorites/{cardId}")
+    public ResponseEntity removeBusinessCardFromFavorites(@PathVariable final Long cardId) {
+        if (businessCardService.isFavoriteCardsOperationAllowed(cardId)) {
+            businessCardService.removeCardFromFavorites(cardId);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
