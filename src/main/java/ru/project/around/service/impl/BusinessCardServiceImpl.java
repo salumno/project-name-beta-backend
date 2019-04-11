@@ -100,13 +100,16 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     @Override
     public void addCardIntoFavorites(final Long cardId) {
         final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
-        final Optional<BusinessCard> businessCard = businessCardRepository.findById(cardId);
+        final Optional<BusinessCard> businessCardOptional = businessCardRepository.findById(cardId);
         final boolean isCardAlreadyAdded = favoriteCardsRepository.findByUserIdAndCardId(currentUserId, cardId) != null;
-        if (businessCard.isPresent() && !isCardAlreadyAdded) {
-            final FavoriteCard favoriteCard = new FavoriteCard();
-            favoriteCard.setUserId(currentUserId);
-            favoriteCard.setCardId(cardId);
-            favoriteCardsRepository.save(favoriteCard);
+        if (businessCardOptional.isPresent() && !isCardAlreadyAdded) {
+            final BusinessCard businessCard = businessCardOptional.get();
+            if (!businessCard.getUserId().equals(currentUserId)) {
+                final FavoriteCard favoriteCard = new FavoriteCard();
+                favoriteCard.setUserId(currentUserId);
+                favoriteCard.setCardId(cardId);
+                favoriteCardsRepository.save(favoriteCard);
+            }
         }
     }
 
@@ -127,6 +130,7 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     @Override
     public void removeCardFromFavorites(final Long cardId) {
         final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
-        favoriteCardsRepository.deleteByUserIdAndCardId(currentUserId, cardId);
+        final FavoriteCard favoriteCard = favoriteCardsRepository.findByUserIdAndCardId(currentUserId, cardId);
+        favoriteCardsRepository.delete(favoriteCard);
     }
 }

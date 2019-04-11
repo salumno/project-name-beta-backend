@@ -11,6 +11,4 @@ public interface FavoriteCardsRepository extends JpaRepository<FavoriteCard, Lon
     List<FavoriteCard> findAllByUserId(final Long userId);
 
     FavoriteCard findByUserIdAndCardId(final Long userId, final Long cardId);
-
-    void deleteByUserIdAndCardId(final Long userId, final Long cardId);
 }

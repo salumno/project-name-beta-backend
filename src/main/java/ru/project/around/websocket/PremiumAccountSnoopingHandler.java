@@ -35,6 +35,9 @@ public class PremiumAccountSnoopingHandler extends TextWebSocketHandler {
 
     @SneakyThrows
     public void sendAccountSnoopingNotification(final PremiumAccountSnoopingNotification notification) {
-        sessions.get(notification.getSnoopedUserId()).sendMessage(new TextMessage(notification.getSnooperId().toString()));
+        final WebSocketSession session = sessions.get(notification.getSnoopedUserId());
+        if (session != null) {
+            session.sendMessage(new TextMessage(notification.getSnooperId().toString()));
+        }
     }
 }
