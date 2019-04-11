@@ -16,7 +16,6 @@ import ru.project.around.util.factory.PhoneCheckCodeFactory;
 import ru.project.around.util.factory.PhoneCheckProcessMarkerFactory;
 import ru.project.around.util.jwt.JwtTokenUtils;
 
-import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -128,6 +127,7 @@ public class AuthServiceImpl implements AuthService {
             user.setPhone(registrationParams.getPhone());
             user.setHashPassword(passwordEncoder.encode(registrationParams.getPassword()));
             user.setStatus(UserStatus.ACTIVE);
+            user.setPremiumStatus(UserPremiumStatus.AVAILABLE);
             userRepository.save(user);
 
             final BusinessCard businessCard = new BusinessCard();
@@ -135,6 +135,7 @@ public class AuthServiceImpl implements AuthService {
             businessCard.setName(registrationParams.getName());
             businessCard.setSurname(registrationParams.getSurname());
             businessCard.setPhone(registrationParams.getPhone());
+            businessCard.setPremium(false);
             businessCardRepository.save(businessCard);
 
             return user;
