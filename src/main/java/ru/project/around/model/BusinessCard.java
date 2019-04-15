@@ -22,5 +22,5 @@ public class BusinessCard {
 
     private String phone;
 
-    private Boolean isPremium;
+    private Boolean premium;
 }
