@@ -1,9 +1,11 @@
-package ru.project.around.model;
+package ru.project.around.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.project.around.model.status.UserPremiumStatus;
+import ru.project.around.model.status.UserStatus;
 
 import javax.persistence.*;
 

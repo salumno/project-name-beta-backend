@@ -1,7 +1,9 @@
 package ru.project.around.service;
 
-import ru.project.around.model.*;
-import ru.project.around.model.login.AppEntryPoint;
+import ru.project.around.model.entity.User;
+import ru.project.around.model.marker.EntryProcessMarker;
+import ru.project.around.model.marker.PhoneCheckProcessMarker;
+import ru.project.around.model.params.*;
 
 public interface AuthService {
     AuthTokens refreshTokens(final RefreshTokensParams refreshTokensParams);

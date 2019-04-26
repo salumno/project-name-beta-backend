@@ -1,9 +1,9 @@
 package ru.project.around.util.factory;
 
 import org.springframework.stereotype.Component;
-import ru.project.around.model.EntryProcessEnum;
-import ru.project.around.model.EntryProcessMarker;
-import ru.project.around.model.PhoneCheckCode;
+import ru.project.around.model.status.EntryProcessEnum;
+import ru.project.around.model.marker.EntryProcessMarker;
+import ru.project.around.model.entity.PhoneCheckCode;
 
 @Component
 public class EntryProcessMarkerFactory {

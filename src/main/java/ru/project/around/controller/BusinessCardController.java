@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.project.around.model.BusinessCard;
-import ru.project.around.model.FavoriteCardParams;
+import ru.project.around.model.entity.BusinessCard;
+import ru.project.around.model.params.FavoriteCardParams;
 import ru.project.around.service.BusinessCardService;
 
 import javax.validation.Valid;

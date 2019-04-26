@@ -2,7 +2,7 @@ package ru.project.around.util.factory;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.project.around.model.BusinessCardSnooper;
+import ru.project.around.model.entity.BusinessCardSnooper;
 
 @Component
 public class BusinessCardSnooperFactory {

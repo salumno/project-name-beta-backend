@@ -2,10 +2,10 @@ package ru.project.around.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.project.around.model.BusinessCard;
-import ru.project.around.model.BusinessCardSnooper;
-import ru.project.around.model.FavoriteCard;
-import ru.project.around.model.PremiumAccountSnoopingNotification;
+import ru.project.around.model.entity.BusinessCard;
+import ru.project.around.model.entity.BusinessCardSnooper;
+import ru.project.around.model.entity.FavoriteCard;
+import ru.project.around.model.notification.PremiumAccountSnoopingNotification;
 import ru.project.around.repository.BusinessCardRepository;
 import ru.project.around.repository.BusinessCardSnooperRepository;
 import ru.project.around.repository.FavoriteCardsRepository;

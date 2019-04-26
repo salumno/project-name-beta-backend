@@ -2,8 +2,8 @@ package ru.project.around.security.details;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.project.around.model.User;
-import ru.project.around.model.UserStatus;
+import ru.project.around.model.entity.User;
+import ru.project.around.model.status.UserStatus;
 
 import java.util.Collection;
 

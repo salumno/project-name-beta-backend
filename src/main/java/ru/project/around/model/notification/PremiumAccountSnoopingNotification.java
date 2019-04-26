@@ -1,4 +1,4 @@
-package ru.project.around.model;
+package ru.project.around.model.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

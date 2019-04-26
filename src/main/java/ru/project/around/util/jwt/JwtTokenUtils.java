@@ -4,8 +4,8 @@ import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.stereotype.Component;
-import ru.project.around.model.TokenTypeEnum;
-import ru.project.around.model.User;
+import ru.project.around.model.status.TokenTypeEnum;
+import ru.project.around.model.entity.User;
 
 import java.time.Instant;
 import java.util.Date;

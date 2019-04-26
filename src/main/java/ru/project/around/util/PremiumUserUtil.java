@@ -2,8 +2,8 @@ package ru.project.around.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.project.around.model.User;
-import ru.project.around.model.UserPremiumStatus;
+import ru.project.around.model.entity.User;
+import ru.project.around.model.status.UserPremiumStatus;
 import ru.project.around.repository.UserRepository;
 
 @Component

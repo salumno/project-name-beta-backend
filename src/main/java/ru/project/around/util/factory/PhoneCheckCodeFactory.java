@@ -2,11 +2,9 @@ package ru.project.around.util.factory;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.project.around.model.PhoneCheckCode;
-import ru.project.around.model.PhoneCheckCodeStatus;
+import ru.project.around.model.entity.PhoneCheckCode;
+import ru.project.around.model.status.PhoneCheckCodeStatus;
 
-import java.time.Instant;
-import java.time.temporal.ChronoField;
 import java.util.UUID;
 
 @Component

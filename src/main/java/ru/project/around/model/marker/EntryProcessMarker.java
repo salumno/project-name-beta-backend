@@ -1,9 +1,10 @@
-package ru.project.around.model;
+package ru.project.around.model.marker;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.project.around.model.status.EntryProcessEnum;
 
 @Data
 @Builder

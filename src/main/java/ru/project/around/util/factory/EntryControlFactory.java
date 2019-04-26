@@ -1,8 +1,8 @@
 package ru.project.around.util.factory;
 
 import org.springframework.stereotype.Component;
-import ru.project.around.model.EntryControl;
-import ru.project.around.model.EntryControlStatusEnum;
+import ru.project.around.model.entity.EntryControl;
+import ru.project.around.model.status.EntryControlStatusEnum;
 
 @Component
 public class EntryControlFactory {

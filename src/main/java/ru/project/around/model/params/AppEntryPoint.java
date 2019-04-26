@@ -1,4 +1,4 @@
-package ru.project.around.model.login;
+package ru.project.around.model.params;
 
 import lombok.Data;
 

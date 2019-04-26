@@ -5,7 +5,7 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-import ru.project.around.model.PremiumAccountSnoopingNotification;
+import ru.project.around.model.notification.PremiumAccountSnoopingNotification;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

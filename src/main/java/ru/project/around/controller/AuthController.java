@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.project.around.model.*;
-import ru.project.around.model.login.AppEntryPoint;
+import ru.project.around.model.entity.User;
+import ru.project.around.model.marker.EntryProcessMarker;
+import ru.project.around.model.marker.PhoneCheckProcessMarker;
+import ru.project.around.model.params.*;
 import ru.project.around.service.AuthService;
 
 import javax.validation.Valid;

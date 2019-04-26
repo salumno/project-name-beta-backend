@@ -1,9 +1,10 @@
-package ru.project.around.model;
+package ru.project.around.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.project.around.model.status.EntryControlStatusEnum;
 
 import javax.persistence.*;
 
@@ -12,21 +13,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class PhoneCheckCode {
+public class EntryControl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String registrationSessionId;
-
     private String phone;
 
-    private String code;
-
-    private Long expirationTime;
+    private Integer registrationAttemptCount;
 
     @Enumerated(EnumType.STRING)
-    private PhoneCheckCodeStatus status;
-
-    private int codeCheckAttemptCount;
+    private EntryControlStatusEnum status;
 }
