@@ -8,4 +8,8 @@ public interface PremiumService {
     boolean isPremiumOperationsAllowed();
 
     List<BusinessCard> getSnoopersBusinessCards();
+
+    boolean isPremiumUpdateAvailable(final Long userId);
+
+    boolean updatePremiumStatus(final Long userId);
 }
