@@ -55,11 +55,16 @@ public class BusinessCardController {
 
     @DeleteMapping("/favorites/{cardId}")
     public ResponseEntity removeBusinessCardFromFavorites(@PathVariable final Long cardId) {
-        if (businessCardService.isFavoriteCardsOperationAllowed(cardId)) {
+        if (businessCardService.isCardFavoriteForCurrentUser(cardId)) {
             businessCardService.removeCardFromFavorites(cardId);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/favorites/{cardId}/check")
+    public ResponseEntity<Boolean> isBusinessCardInFavorites(@PathVariable final Long cardId) {
+        return ResponseEntity.ok(businessCardService.isCardFavoriteForCurrentUser(cardId));
     }
 }

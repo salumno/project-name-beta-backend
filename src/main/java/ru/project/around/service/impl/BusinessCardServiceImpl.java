@@ -121,7 +121,7 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     }
 
     @Override
-    public boolean isFavoriteCardsOperationAllowed(final Long cardId) {
+    public boolean isCardFavoriteForCurrentUser(final Long cardId) {
         final Long currentUserId = securityContextUtils.getUserIdFromCurrentAuthToken();
         final FavoriteCard favoriteCard = favoriteCardsRepository.findByUserIdAndCardId(currentUserId, cardId);
         return favoriteCard != null;

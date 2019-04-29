@@ -17,7 +17,7 @@ public interface BusinessCardService {
 
     boolean isCardOperationAllowed(final Long cardId, final BusinessCard updatedBusinessCard);
 
-    boolean isFavoriteCardsOperationAllowed(final Long cardId);
+    boolean isCardFavoriteForCurrentUser(final Long cardId);
 
     void removeCardFromFavorites(final Long cardId);
 }
