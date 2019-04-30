@@ -23,4 +23,8 @@ public class BusinessCard {
     private String phone;
 
     private Boolean premium;
+
+    private String instagramId;
+
+    private String vkId;
 }

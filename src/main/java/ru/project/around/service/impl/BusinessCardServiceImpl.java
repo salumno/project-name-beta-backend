@@ -84,6 +84,8 @@ public class BusinessCardServiceImpl implements BusinessCardService {
         );
         businessCard.setName(updatedBusinessCard.getName());
         businessCard.setSurname(updatedBusinessCard.getSurname());
+        businessCard.setVkId(updatedBusinessCard.getVkId());
+        businessCard.setInstagramId(updatedBusinessCard.getInstagramId());
         return businessCardRepository.save(businessCard);
     }
 
