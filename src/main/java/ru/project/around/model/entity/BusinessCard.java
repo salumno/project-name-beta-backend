@@ -27,4 +27,6 @@ public class BusinessCard {
     private String instagramId;
 
     private String vkId;
+
+    private String iconUri;
 }
