@@ -3,8 +3,8 @@ auth:
   jwt:
     secret: semyon_secret
     exp:
-      access: 120000
-      refresh: 240000
+      access: 300000
+      refresh: 2592000000
 
 spring:
   application:
