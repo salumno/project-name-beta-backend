@@ -28,5 +28,9 @@ public class BusinessCard {
 
     private String vkId;
 
+    private String facebookId;
+
+    private String twitterId;
+
     private String iconUri;
 }
